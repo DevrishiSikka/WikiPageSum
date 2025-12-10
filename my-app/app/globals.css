@@ -19,6 +19,16 @@
   color: inherit;
 }
 
+/* Utility to disable transitions during theme switch for smoother View Transitions */
+.no-transition,
+.no-transition .transition-all,
+.no-transition .transition-colors,
+.no-transition .transition-opacity,
+.no-transition .transition-shadow,
+.no-transition .transition-transform {
+  transition: none !important;
+}
+
 /* View Transition API styles for the sweep effect */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -28,6 +38,7 @@
 
 ::view-transition-new(root) {
   z-index: 9999;
+  will-change: clip-path;
 }
 ::view-transition-old(root) {
   z-index: 1;
@@ -186,16 +197,20 @@
 
 .animate-spin-slow {
   animation: spin-slow 60s linear infinite;
+  will-change: transform;
 }
 
 .animate-spin-reverse-slow {
   animation: spin-reverse-slow 45s linear infinite;
+  will-change: transform;
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 8s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .animate-float {
   animation: float 10s ease-in-out infinite;
+  will-change: transform;
 }

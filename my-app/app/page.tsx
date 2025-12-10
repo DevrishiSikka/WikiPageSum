@@ -27,9 +27,14 @@ export default function Home() {
 
     // @ts-ignore
     const transition = document.startViewTransition(() => {
+      document.documentElement.classList.add('no-transition')
       flushSync(() => {
         setIsDark(!isDark)
       })
+    })
+
+    transition.finished.then(() => {
+      document.documentElement.classList.remove('no-transition')
     })
 
     await transition.ready
@@ -44,8 +49,8 @@ export default function Home() {
         clipPath: clipPath,
       },
       {
-        duration: 500,
-        easing: "ease-in-out",
+        duration: 700,
+        easing: "cubic-bezier(0.645, 0.045, 0.355, 1)",
         pseudoElement: "::view-transition-new(root)",
       }
     )
@@ -70,8 +75,14 @@ export default function Home() {
     }}>
       {/* God Animation Background - Moved to root level */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Central Glowing Orb */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-blue-500 blur-[100px] animate-pulse-glow ${isDark ? 'opacity-20' : 'opacity-25'}`}></div>
+        {/* Central Glowing Orb - Optimized with gradient instead of blur for mobile performance */}
+        <div 
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] animate-pulse-glow ${isDark ? 'opacity-30' : 'opacity-40'}`}
+          style={{ 
+            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%)',
+            willChange: 'transform, opacity'
+          }}
+        ></div>
         
         {/* Rotating Rings */}
         <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] animate-spin-slow" viewBox="0 0 600 600">
