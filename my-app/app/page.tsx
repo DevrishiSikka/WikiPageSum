@@ -122,7 +122,7 @@ export default function Home() {
           <div className="flex flex-col items-end gap-4">
             <button
               onClick={toggleTheme}
-              className={`px-3 py-2 text-xs font-mono border-2 ${borderColor} ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50'} transition-all`}
+              className={`px-3 py-2 text-xs font-mono border-2 ${borderColor} ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50'} transition-all select-none`}
               title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
               {isDark ? "☀️ LIGHT" : "🌙 DARK"}
@@ -146,12 +146,12 @@ export default function Home() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search..."
+              placeholder="https://..."
               className={`flex-1 px-4 py-3 text-sm font-mono border-2 ${inputBorder} ${inputBg} bg-opacity-80 focus:bg-opacity-100 focus:outline-none transition-all`}
             />
             <button
               type="submit"
-              className={`px-6 py-3 text-sm font-mono border-2 ${borderColor} ${isDark ? 'bg-gray-900 hover:bg-gray-800 hover:border-blue-500' : 'bg-white hover:bg-blue-50 hover:border-blue-400'} ${textColor} focus:outline-none transition-all`}
+              className={`px-6 py-3 text-sm font-mono border-2 ${borderColor} ${isDark ? 'bg-gray-900 hover:bg-gray-800 hover:border-blue-500' : 'bg-white hover:bg-blue-50 hover:border-blue-400'} ${textColor} focus:outline-none transition-all select-none`}
             >
               tl;dr
             </button>
