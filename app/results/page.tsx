@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, Suspense } from "react"
 import { flushSync } from "react-dom"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
@@ -19,7 +19,7 @@ const pastChats = [
   { id: 5, title: "MDN Web Docs", url: "https://developer.mozilla.org", date: "Dec 10" },
 ]
 
-export default function ResultsPage() {
+function ResultsContent() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -238,5 +238,21 @@ export default function ResultsPage() {
         </div>
       </section>
     </main>
+  )
+}
+
+export default function ResultsPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-screen flex items-center justify-center bg-white dark:bg-gray-950">
+        <div className="flex gap-1">
+          <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+          <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+          <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+        </div>
+      </div>
+    }>
+      <ResultsContent />
+    </Suspense>
   )
 }
