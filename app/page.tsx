@@ -102,22 +102,22 @@ export default function Home() {
     }}>
       {/* Success Confirmation Toast */}
       {showConfirmation && (
-        <div className="fixed top-8 inset-x-0 z-50 flex justify-center">
-          <div className={`relative flex items-center gap-3 px-5 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-lg overflow-hidden ${isClosing ? 'animate-slide-up' : 'animate-slide-down'}`}>
+        <div className="fixed top-6 inset-x-0 z-50 flex justify-center">
+          <div className={`relative flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-md overflow-hidden ${isClosing ? 'animate-slide-up' : 'animate-slide-down'}`}>
             {/* Subtle shimmer effect */}
             <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-blue-500/5 to-transparent" />
             
-            <div className="w-5 h-5 flex items-center justify-center">
-              <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-4 h-4 flex items-center justify-center">
+              <svg className="w-3 h-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path className="animate-draw-check" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <span className="text-lg font-mono text-black dark:text-white">You&apos;re on the list</span>
+            <span className="text-sm font-mono text-black dark:text-white">You&apos;re on the list</span>
             <button 
               onClick={closeToast}
-              className="ml-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="ml-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -193,7 +193,7 @@ export default function Home() {
               value={waitlistEmail}
               onChange={(e) => setWaitlistEmail(e.target.value)}
               placeholder="name@example.com"
-              className="flex-1 px-4 py-3 text-sm font-mono border-2 border-gray-300 focus:border-blue-400 dark:border-gray-600 dark:focus:border-blue-500 bg-white text-gray-900 placeholder-gray-500 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 bg-opacity-80 focus:bg-opacity-100 focus:outline-none transition-all disabled:opacity-50"
+              className="flex-1 px-4 py-3 text-base md:text-sm font-mono border-2 border-gray-300 focus:border-blue-400 dark:border-gray-600 dark:focus:border-blue-500 bg-white text-gray-900 placeholder-gray-500 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 bg-opacity-80 focus:bg-opacity-100 focus:outline-none transition-all disabled:opacity-50"
               disabled={isSubmitting}
             />
             <button
