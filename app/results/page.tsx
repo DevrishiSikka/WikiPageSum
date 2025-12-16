@@ -23,7 +23,7 @@ function ResultsContent() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<"TL;DR" | "Timeline" | "Related">("TL;DR")
+  const [activeTab, setActiveTab] = useState<"TL;DR" | "Timeline">("TL;DR")
   const [selectedChat, setSelectedChat] = useState<number | null>(null)
   const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 })
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([])
@@ -39,7 +39,7 @@ function ResultsContent() {
 
   // Update indicator position when active tab changes
   useEffect(() => {
-    const tabs = ["TL;DR", "Timeline", "Related"] as const
+    const tabs = ["TL;DR", "Timeline"] as const
     const activeIndex = tabs.indexOf(activeTab)
     const activeTabEl = tabsRef.current[activeIndex]
     if (activeTabEl) {
@@ -169,17 +169,38 @@ function ResultsContent() {
             </div>
           </aside>
 
-          {/* Right Content Area */}
+          {/* Main Content Area */}
           <div className="flex-1 min-w-0 flex flex-col h-full overflow-hidden">
             {/* URL being processed */}
-            <div className="mb-4">
+            <div className="mb-3">
               <p className="text-xs text-gray-500 dark:text-gray-400 font-mono mb-1">PROCESSING</p>
               <p className="text-sm font-mono text-blue-500 dark:text-blue-400 break-all truncate">{url}</p>
             </div>
 
+            {/* Related Articles - Always visible horizontal row */}
+            <div className="mb-4 flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
+              <span className="text-xs text-gray-500 dark:text-gray-400 font-mono whitespace-nowrap">SEE ALSO →</span>
+              <div className="flex gap-3">
+                {[
+                  { title: "Getting Started Guide", url: "#" },
+                  { title: "API Reference", url: "#" },
+                  { title: "Best Practices", url: "#" },
+                  { title: "Tutorials", url: "#" },
+                ].map((article) => (
+                  <a
+                    key={article.title}
+                    href={article.url}
+                    className="text-xs font-mono text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-600 hover:decoration-blue-400 transition-all whitespace-nowrap"
+                  >
+                    {article.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+
             {/* Tabs */}
             <div className="relative flex gap-0 mb-4 border-b-2 border-gray-200 dark:border-gray-800">
-              {(["TL;DR", "Timeline", "Related"] as const).map((tab, index) => (
+              {(["TL;DR", "Timeline"] as const).map((tab, index) => (
                 <button
                   key={tab}
                   ref={(el) => { tabsRef.current[index] = el }}
@@ -227,12 +248,11 @@ function ResultsContent() {
                 </div>
               ) : (
                 /* Tab Content */
-              <div className="animate-slide-in h-full">
-                {activeTab === "TL;DR" && <TLDRTab />}
-                {activeTab === "Timeline" && <TimelineTab />}
-                {activeTab === "Related" && <RelatedTab />}
-              </div>
-            )}
+                <div className="animate-slide-in h-full">
+                  {activeTab === "TL;DR" && <TLDRTab />}
+                  {activeTab === "Timeline" && <TimelineTab />}
+                </div>
+              )}
             </div>
           </div>
         </div>
